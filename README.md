@@ -3,6 +3,7 @@ Summary of the Clean Architecture book
 
 1.What is Design and Architecture?
 
+
 Architecture and Design are the same thing, 
 
 2.A Tale of Two Values
