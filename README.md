@@ -89,6 +89,9 @@ Explanations:
 - SRP + CCP summarized: gather together those things that change at the same times and for the same reasons. Separate those things that change at different times or for different reasons.
 - CRP: dont force users of a component to depend on things they dont need.
 
+![components-cohesion-tension-diagram.jpeg](components-cohesion-tension-diagram.jpeg)
+
+
 Chapter 14 Component Coupling
 
 (Side note: Dependency structures in dynamic languages are much simpler because dependency inversion does not require the declaration and implementation of interfaces. However, the ideas about the direction of component dependencies still apply.)
