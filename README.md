@@ -43,7 +43,7 @@ Software is composed of sequence, selection , iteration and indirection. Nothing
 Chapter 7 SRP: The Single Responsibility Principle
 
 A module should be responsible to one, and only one, user or stakeholder -> A module should be responsible to one, and only one, actor.
-SRP is about functions and classes, but it reappears in a  different form at two more levels. At the level of compones, it becomes the Common Closure Principle. At the architectural level, it becomes the Axis of Change responsivle for the creation of Architectural boundaries.
+SRP is about functions and classes, but it reappears in a  different form at two more levels. At the level of components, it becomes the Common Closure Principle. At the architectural level, it becomes the Axis of Change responsible for the creation of Architectural boundaries.
 
 Chapter 8 OCP: The Open-Closed Principle
 
@@ -51,7 +51,7 @@ A software artifact should be open for extension but closed for modification. Th
 
 Chapter 9 LSP: The Liskov Substitution Principle
 
-The LSP, can, and should, be extended go the level of architecture. A simple violation of substitutability, can cause a system's architecture to be polluted with a significant amount of extra mechanisms.
+The LSP, can, and should, be extended to the level of architecture. A simple violation of substitutability, can cause a system's architecture to be polluted with a significant amount of extra mechanisms.
 
 Chapter 10 ISP: The Interface Segregation Principle
 
@@ -83,8 +83,11 @@ Principles of component cohesion:
 - CCP: the Common Closure Principle
 - CRP: the Common Reuse Principle
 
-REP: modules in a component should make sense together.
-CCP: gather into componentd thode classes that change for the same reasons and at the same times. Separate into different components those classes that change at different times and for different reasons. Is like SRP for components.
-SRP + CCP summarized: gather together those things that change at the same times and for the same reasons. Separate those things that change at different times or for different reasons.
-CRP. Dont force users of a component to depend on things they dont need.
+Explanations:
+- REP: modules in a component should make sense together.
+- CCP: gather into components those classes that change for the same reasons and at the same times. Separate into different components those classes that change at different times and for different reasons. Is like SRP for components.
+- SRP + CCP summarized: gather together those things that change at the same times and for the same reasons. Separate those things that change at different times or for different reasons.
+- CRP: dont force users of a component to depend on things they dont need.
+
+
 
