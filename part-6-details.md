@@ -26,6 +26,7 @@ A more practical approach is to reason about the interactions between the GUI an
 
 
 Trying to achieve device independence for the first type of interactions is probably unpractical and not business critical. On the other hand, it is easier to do so for the second type and luckily our precious business logic (use cases) can be separated from the GUI in this case.
+
 ## Chapter 32 Frameworks are Details
 Frameworks are powerful and useful; but they are not architectures.
 
@@ -44,6 +45,7 @@ You relationships with frameworks is asymmetric in nature: as engineers we make 
 Treat frameworks as details and limit its use to the outer layers of the clean architecture. That is, don't let them into your Use Cases or Entities.
 
 If you need to let them in, don't derive a framework class, derive a proxy instead that you control and that acts as a plugin to the business rules.
+
 ## Chapter 33 Case Study: Video Sales
 A case study that shows how to apply architectural thinking to an application.
 
@@ -66,4 +68,4 @@ Make sure your preliminary design follows the Dependency Rule:
 - Arrows point towards the higher-level components.
 - All arrows cross boundaries in the same direction.
 
-## Chapter 32 The Missing Chapter
+## Chapter 34 The Missing Chapter
