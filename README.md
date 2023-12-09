@@ -1,8 +1,8 @@
 # Clean Architecture
 Summary of the Clean Architecture book
 
-[Part I - Introduction](part-1-introduction.md) 
-[Part II - Starting with the Bricks: Programming Paradigms](part-2-starting-with-the-bricks.md) 
+- [Part I - Introduction](part-1-introduction.md) 
+= [Part II - Starting with the Bricks: Programming Paradigms](part-2-starting-with-the-bricks.md) 
 
 
 ### PART III Design Principles
