@@ -152,10 +152,98 @@ It should be clear that this sets the stage for a future architectural boundary.
 An even simpler boundary is the Facade pattern. In this case, even the dependency inversion is sacrificed. The boundary is simply defined by the Facade class, which lists all the services as methods, and deploys the service calls to classes that the client is not supposed to access.
 
 ## Chapter 25 Layers and Boundaries
+This chapter shows an example of how Clean Architecture thinking can be applied to a simple game that has increasingly complex requirements and how that leads to discovery of potential boundaries that didn't look apparent.
+
+The points being made here are:
+
+- Even for simple programs, we can come up with many architectural boundaries everywhere if we try hard enough.
+- Software architecture has an unfortunate inherent trade-off between the cost of implementing boundaries VS the cost of ignoring them.
+- Implementing a strict boundary when the software is simple and the boundary could be ignored is costly and leads to over-engineering.
+- Implementing a boundary after we have ignored one is costly and risky. Also, permanently ignoring one where it is needed makes the project costly to maintain and change.
+- So what do we do? We weigh the costs and risks of implementing vs ignoring to determine where architectural boundaries lie, which should be strict, which can be partial and which can be ignored.
+- Note that this is not one time decision. As the project evolves, we watch what things are causing friction in the development and maintainability and could use a boundary.
+- Our goal is to implement the boundary at the point where the cost of implementation is less than the cost of ignoring.
+
 ## Chapter 26 The Main Component
+In every system, there is at least one component that creates, coordinates, and oversees the others. This component is called by the author as Main.
+
+Under the Clean Architecture, Main is the outer-most layer and is the lowest-level plugin to the application. This layer is not depicted in the diagram shown in Chapter 22 - The Clean Architecture.
+
+The job of Main is:
+
+- Create all Factories, Strategies and other global facilities, then hand over control to the high-level portions of the system.
+- The dependency injection framework should inject dependencies into Main. Then Main should distribute those dependencies just using code (without a framework).
+
+Since main is a plugin, it is possible to have many Main components, one for each configuration of your app. For example:
+
+- Main for Dev another for Test and another for Production.
+- One Main for every deployment region of your business.
+
 ## Chapter 27 Services: Great and Small
+
+Service-oriented "architectures" and microservices have become popular recently due to 2 reasons:
+
+- Services seem to be strongly decoupled from each other. As we shall see, this is only partially true.
+- Services appear to support independence of development and deployment. Again, as we shall see, this is only partially true.
+
+### Are Services an Architecture?
+Services do not define the architecture. Services are really a Decoupling Mode, not an architecture in itself. 
+
+### Are the Benefits of Services Real?
+
+#### The Decoupling Hype
+One of the supposed benefits of breaking a system into service is its strict decoupling which enforces no shared memory and well defined interfaces between services.
+
+This is only partially true:
+
+Separate services can still be coupled by the structure of the data they pass to each other. If a field is added to a record in one place, all other services get that data passed in need to change. Also, the meaning of each data field in each service needs to be the same (conceptual coupling).
+Services that share a database are coupled by both the schema and the "shared memory" that the data represents.
+The benefits of strictness of network interfaces are true, but this is also true for function calls that have been given the correct visibility attributes.
+
+#### The Independence of Development and Deployment Hype
+The points above also mean that the idea of independent development and deployment are also only partially true. For example, if services A and B share the database or the data format that is passed, when Service A changes the database schema, then Service B needs to change and the deployment needs to be coordinated.
+
 ## Chapter 28 The Test Boundary
+Tests are part of the architecture of a system. The good news is that from the point of view of the architecture, unit tests, integration tests, behaviour tests...etc... all look the same. They all are detailed, low-level components that always depend inward to the code being tested. In a way, tests are the outermost circle of the clean architecture.
+
+### Design for Testability
+Testing should be part of the considerations when designing a system. Not considering tests as part of the design is a mistake that leads to fragile tests that are expensive to maintain and often end up getting discarded.
+
+Fragile test problems occur when tests depend on volatile things (like the GUI) to test stable things. For example, writing GUI driven tests to test business rules can cause many use case tests to break when unrelated changes in the GUI happen.
+
+To avoid these problems, design the system and the tests so that business rules can be tested without using the GUI (or other volatile things). The way the author recommends to do this is to create a testing API that has "superpowers". These super powers include avoiding security constraints, bypassing expensive resources such as databases and allow developers to force the system into particular testable states.
+
 ## Chapter 29 Clean Embedded Architecture
+
+> It is not uncommon for embedded software to be denied a potentially
+> long life due to being infected with dependencies on hardware.
+
+Firmware is software that is tightly coupled to the hardware it runs on. This coupling results in the need to re-write when the hardware changes.
+
+Hardware changes at a very fast pace. To shield businesses from this, firmware engineers should be writing more *software* (code that has been isolated from the hardware it runs on) and less *firmware*.
+
+### App-titude Test: The problem with just making it work
+
+A general software good practice is:
+
+> 1. “First make it work.” You are out of business if it doesn't work.
+> 2. “Then make it right.” Refactor the code so that you and others can
+>    understand it and evolve it as needs change or are better
+>    understood.
+> 3. “Then make it fast.” Refactor the code for “needed” performance.
+
+Many engineers stop at "making it work" (aka the app-titude test) and never go beyond that.In embedded software in particular, often 1 and 3 are done together and 2 is never considered.
+
+### The Target-Hardware Bottleneck Problem
+
+> There are many special concerns that embedded developers have to deal
+> with that non-embedded developers do not—for example, limited memory
+> space, real-time constraints and deadlines, limited IO, unconventional
+> user interfaces, and sensors and connections to the real world.
+
+Yes, embedded software has to run in special constrained hardware. However, embedded software *development* is not SO special; the principles of clean architecture still apply.
+
+In embedded systems, you know you have problems when you can only test your code on the target hardware (as opposed to being able to test the business rules of your code independent of the hardware). This is known as the *target hardware bottleneck problem*. **A clean embedded architecture is a testable embedded architecture.**
 
 
 
