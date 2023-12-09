@@ -141,10 +141,14 @@ Note that all partial boundaries are open to degradation if developers are not d
 Note that as a general rule of thumb, code from outer layers should be compromised with partial boundaries first. 
 Ways to introduce partial boundaries:
 
-#### The strategy pattern
+### One-dimensional boundaries
 ![strategy-pattern.png](strategy-pattern.png)
+
 It should be clear that this sets the stage for a future architectural boundary. The necessary dependency inversion is in place in an attempt to isolate the Client from the ServiceImpl. It should also be clear that the separation can degrade pretty rapidly, as shown by the nasty dotted arrow in the diagram.
+
+### Facades
 ![facade-pattern.png](facade-pattern.png)
+
 An even simpler boundary is the Facade pattern. In this case, even the dependency inversion is sacrificed. The boundary is simply defined by the Facade class, which lists all the services as methods, and deploys the service calls to classes that the client is not supposed to access.
 
 ## Chapter 25 Layers and Boundaries
