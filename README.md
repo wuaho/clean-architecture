@@ -6,3 +6,4 @@ Summary of the Clean Architecture book
 - [Part III - Design Principles](part-3-design-principles.md)
 - [Part IV - Component Principles](part-4-component-principles.md)
 - [Part V - Architecture](part-5-architecture.md)
+- [Part VI - Details](part-6-details.md)
