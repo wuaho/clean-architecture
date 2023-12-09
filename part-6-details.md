@@ -112,3 +112,24 @@ In Java, layers are often implemented as packages.
 
 #### 4. Package by component
 
+This is Simon Brown's preference on how to organize code It uses a slightly different definition of "component" than Uncle Bob's.
+
+- For Uncle Bob, a "component" is a fine grained grouping of functionality that, if needed could be packaged into a single jar file each. The actual division of components into packages is not prescribed by Uncle Bob and left up to the engineers to figure out what makes sense for their application.
+- For Simon, "components" are coarser and the concept is much more related to an actual suggested Java package division strategy for code organisation an the usage of package visibility modifiers to enforce the architecture and encapsulation.
+
+Simon's "package by component" does not contradict the ideas from Clean Architecture. His idea represent a practical implementation of how to divide code into Java packages.
+
+The problems he is trying to solve are:
+
+- In the "package by layer", "package by feature" and "ports and adapters" packaging strategies there is nothing stopping a developer from "skipping a layer" and doing something like importing the OrdersRepository<I> in the OrdersController.
+- To avoid problems like this to happen, teams often rely on discipline (but we know how that goes) or extra static analysis tools to detect when the intended architecture has been violated. He argues that the best approach to enforce this architectural principle is via the compiler.
+Static analysis tools work, but sometimes extend the feedback cycle too much.
+
+![package-by-component.png](package-by-component.png)
+
+##### Trade-offs
+Compared to "ports and adapters", trade-offs a little bit of the strictness in the horizontal layering for having less packages and making it impossible to import the wrong thing from the OrdersController.
+
+- Less packages = easier to understand and deploy. All the code needed to make the OrdersComponent work travels together.
+- Cheat-proof: It is impossible to import the OrdersRepository<I> from the controller.
+- Swapping with arbitrary implementations of the OrdersRepository<I> is no longer possible, although the code still maintains the proper separation of concerns internally, so it shouldn't be hard.
