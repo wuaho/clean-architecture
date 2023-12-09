@@ -69,3 +69,43 @@ Make sure your preliminary design follows the Dependency Rule:
 - All arrows cross boundaries in the same direction.
 
 ## Chapter 34 The Missing Chapter
+All the advice so far will make you a better engineer. But, the devil is in the details, so lets take some time to see how some of this ideas are implemented.
+
+### 4 Ways to organize code
+
+#### 1. Package by layer
+
+- Separate code by what it does form the technical perspective, for example models, views and controllers.
+- This is a horizontal-only layering approach. Ideally layers only depend on the next adjacent layer.
+In Java, layers are often implemented as packages.
+- Pros: simple way to get started. Easy to understand.
+- Cons:
+  - As software becomes more complex, the pre-established amount of layers is not sufficient. Not all features require all layers.
+  - The project structure does not scream what the project does.
+  - It is easy for developers to "skip a layer" and still maintain the rule of "all dependencies should point downward". For example, a controller may import a repository directly skipping the interactors. "Skipping a layer" can quickly degrade into big balls of mud.
+
+![package-by-layer.png](package-by-layer.png)
+
+#### 2. Package by feature
+- Vertical slicing based on related features, domain concepts or aggregate roots.
+- Pros:
+  - The project structure screams architecture.
+  - It is easier to find all the code you need to touch if a use case / feature changes, since all is grouped together.
+- Cons:
+  - It is often considered a step up from "package by layer", but both are sub-optimal. We can do better.
+![package-by-feature.png](package-by-feature.png)
+
+
+#### 3. Ports and adapters
+- Architectures like "ports and adapters", "hexagonal architecture", "boundaries, controllers, entities" all have this organisation strategy.
+- Roughly speaking, all bits of code on a project can be categorized as being "inside" if they are part of the domain business rules, or "outside" if the are infrastructure or details.
+- Things "inside" are independent from technical implementation details such as frameworks and databases.
+- Things "outside" depend on things "inside", not the other way around.
+- Pros:
+  - Good encapsulation that naturally follows the horizontal and vertical layering.
+- Cons:
+  - Will lead to a large number of packages.
+  - It is still technically possible for the OrdersController to import the Orders<I> skipping the OrdersService<I> (more on this on the next section).
+
+![domain-and-infrastructure.png](domain-and-infrastructure.png)
+![view-orders-use-case.png](view-orders-use-case.png)
