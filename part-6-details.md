@@ -45,4 +45,25 @@ Treat frameworks as details and limit its use to the outer layers of the clean a
 
 If you need to let them in, don't derive a framework class, derive a proxy instead that you control and that acts as a plugin to the business rules.
 ## Chapter 33 Case Study: Video Sales
+A case study that shows how to apply architectural thinking to an application.
+
+### Step 1: Use Case Analysis: Identify the actors and their use cases
+- Each actor represents a group of people that will drive changes into the system (they are reasons why the systems needs to change).
+- Partition the system such that changes for one actor does not impact other actors.
+
+![use-case-analysis.png](use-case-analysis.png)
+
+### Step 2: Create a Preliminary Component Architecture
+![preliminary-component-architecture.png](preliminary-component-architecture.png)
+
+In this case, the Gateways are not divided by use case, meaning that this architecture does not follow the strict vertical and horizontal layer division presented before.
+
+This an example of a partial boundary trade-off, made to reduce the project complexity. Note that the rest of the components do maintain vertical and horizontal layering and that the compromise was made on one of the outer layers (not on the use cases or entities).
+
+### Step 3: Check the Dependency Management
+Make sure your preliminary design follows the Dependency Rule:
+
+- Arrows point towards the higher-level components.
+- All arrows cross boundaries in the same direction.
+
 ## Chapter 32 The Missing Chapter
