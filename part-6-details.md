@@ -109,3 +109,6 @@ In Java, layers are often implemented as packages.
 
 ![domain-and-infrastructure.png](domain-and-infrastructure.png)
 ![view-orders-use-case.png](view-orders-use-case.png)
+
+#### 4. Package by component
+
