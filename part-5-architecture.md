@@ -116,7 +116,37 @@ Common violations of these are:
 - Having the DB framework pass some sort of automated "row structure" created as a result of a query into the use case (e.g. pass in active record objects into the use cases).
 
 ## Chapter 23 Presenters and Humble Objects
+
+### The Humble Object Pattern
+This pattern helps us identify and protect architectural boundaries. The Clean architecture extensively uses the Humble object pattern to do just this.
+
+Starting with code that is very hard to test (like a GUI), the pattern makes the thing that is hard to test as dumb as possible (i.e. humble) by pulling out things that are easy to test into a separate class.
+
+For example, a GUI can be split into a presenter and a view (a form of Humble object) that is very dumb. This makes it very easy to test all the GUI content via the presenter without actually having to render the GUI. The view is so dumb that it is not even tested automatically.
+
+### More on Presenters and View Models and Views
+Presenters format everything and dump the result of that formatting into a View Model data structure that contains Strings, boolean flags and enums.
+
+These are some things that the Presenter places into the View Model: stringified dates, stringified currencies, currency color, labels for buttons, if buttons should be disabled or not, menu items, names for every radio button, check box and text fields, tables, etc...
+
+The View only loads data from the view model.
+
 ## Chapter 24 Partial Boundaries
+Fully-fledged strict architectural boundaries result the creation of a lot of interfaces and data structure classes to maintain. Sometimes, this can be judged as too complex or too expensive to build in light of the specifics of the project. See the next chapter for more information of when to use these.
+
+For those cases, we might want to introduce a Partial Boundary. A partial boundary allows us to reduce the complexity (in terms of number of files) but ideally still leaves room to upgrade to a strict boundary if needed.
+
+Note that all partial boundaries are open to degradation if developers are not disciplined. Therefore, there might be some work required to upgrade it to a strict boundary.
+
+Note that as a general rule of thumb, code from outer layers should be compromised with partial boundaries first. 
+Ways to introduce partial boundaries:
+
+#### The strategy pattern
+![strategy-pattern.jpg](strategy-pattern.jpg)
+It should be clear that this sets the stage for a future architectural boundary. The necessary dependency inversion is in place in an attempt to isolate the Client from the ServiceImpl. It should also be clear that the separation can degrade pretty rapidly, as shown by the nasty dotted arrow in the diagram.
+![facade-pattern.jpg](facade-pattern.jpg)
+An even simpler boundary is the Facade pattern. In this case, even the dependency inversion is sacrificed. The boundary is simply defined by the Facade class, which lists all the services as methods, and deploys the service calls to classes that the client is not supposed to access.
+
 ## Chapter 25 Layers and Boundaries
 ## Chapter 26 The Main Component
 ## Chapter 27 Services: Great and Small
