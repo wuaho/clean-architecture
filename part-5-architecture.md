@@ -27,6 +27,9 @@ Any organization  that designs a system will produce a design whose structure is
 Decoupling so that the architect can employ the Single Responsibility Principle and the Common Closure Principle to separate those things that change for different reasons, and to collect thhose things that change for the same reasons--given the context of the intent of the system.
 
 ## Chapter 17 Boundaries: Drawing Lines
+You draw lines between things that matter and things that don't. The GUI doesn't matter to the business rules, so there should be a line between them. The database doesn't matter to the GUI, so there should be a line between them.The database doesn't matter to the business rules, so there should be a line between them.
+
+![the-boundary-line.png](the-boundary-line.png)
 
 ## Chapter 18 Boundary Anatomy
 ## Chapter 19 Policy and Level
