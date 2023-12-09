@@ -105,7 +105,7 @@ In Java, layers are often implemented as packages.
   - Good encapsulation that naturally follows the horizontal and vertical layering.
 - Cons:
   - Will lead to a large number of packages.
-  - It is still technically possible for the OrdersController to import the Orders<I> skipping the OrdersService<I> (more on this on the next section).
+  - It is still technically possible for the OrdersController to import the Orders skipping the OrdersService.
 
 ![domain-and-infrastructure.png](domain-and-infrastructure.png)
 ![view-orders-use-case.png](view-orders-use-case.png)
@@ -121,7 +121,7 @@ Simon's "package by component" does not contradict the ideas from Clean Architec
 
 The problems he is trying to solve are:
 
-- In the "package by layer", "package by feature" and "ports and adapters" packaging strategies there is nothing stopping a developer from "skipping a layer" and doing something like importing the OrdersRepository<I> in the OrdersController.
+- In the "package by layer", "package by feature" and "ports and adapters" packaging strategies there is nothing stopping a developer from "skipping a layer" and doing something like importing the OrdersRepository in the OrdersController.
 - To avoid problems like this to happen, teams often rely on discipline (but we know how that goes) or extra static analysis tools to detect when the intended architecture has been violated. He argues that the best approach to enforce this architectural principle is via the compiler.
 Static analysis tools work, but sometimes extend the feedback cycle too much.
 
@@ -131,5 +131,5 @@ Static analysis tools work, but sometimes extend the feedback cycle too much.
 Compared to "ports and adapters", trade-offs a little bit of the strictness in the horizontal layering for having less packages and making it impossible to import the wrong thing from the OrdersController.
 
 - Less packages = easier to understand and deploy. All the code needed to make the OrdersComponent work travels together.
-- Cheat-proof: It is impossible to import the OrdersRepository<I> from the controller.
-- Swapping with arbitrary implementations of the OrdersRepository<I> is no longer possible, although the code still maintains the proper separation of concerns internally, so it shouldn't be hard.
+- Cheat-proof: It is impossible to import the OrdersRepository from the controller.
+- Swapping with arbitrary implementations of the OrdersRepository is no longer possible, although the code still maintains the proper separation of concerns internally, so it shouldn't be hard.
