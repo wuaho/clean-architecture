@@ -85,6 +85,36 @@ The following things are often mistaken as an architecture, but they are not:
 - Frameworks: frameworks and the structures they impose are not an architecture. Frameworks authors and their community tend to be true believers of them and assume a "let-the-framework-do-everything" position. This is not the position we want to take. Frameworks help, but that comes at a cost that may not be worth paying. Preserve the use case emphasis of your architecture and develop a strategy in which you can use a framework without it taking over your architecture.
 
 ## Chapter 22 The Clean Architecture
+Once we know how to separate components by setting boundaries, we can organize these components into layers. Layers are concentric and represent how fundamental (or high-level) components are. At the core, we have the high-level policies, i.e. stable and abstract components encapsulating our business rules. On the outer ring, we have the details, for example, unstable and concrete GUI’s.
+
+![clean-architecture.jpg](clean-architecture.jpg)
+
+Source-level dependencies should be organized according to the dependency rule: outer layers should depend on inner layers (at the source-level), and not vice versa. We can remove violations of the dependency rule by setting boundaries.
+
+We can identify four main layers, although the number may vary:
+
+- Entities: objects containing critical business logic. For example, a bank could establish that no loans are granted to customers not satisfying some credit score requirements. Entities may be shared across apps in the same enterprise.
+- Use-cases: app-specific business rules. For example, the sequence of screens to execute a bank transfer.
+- Interface adapters: Gateways, presenters and controllers. For example, this layer will contain the MVC architecture of the GUI and also objects that transform data between the format of the database and the use-cases.
+- Frameworks and drivers: web frameworks, database, the view of MV
+
+#### Crossing Boundaries
+The diagram above shows an example on how to cross the boundaries. Note the usage of Dependency Inversion to ensure that source code dependencies always point to higher-level layers. Also note that the source code dependency direction is independent from the flow of control (aka flow of execution) direction.
+
+##### Which Data Crosses the Boundaries
+Data crosses boundaries in simple data structures. All of these forms are acceptable:
+
+Structs.
+- Simple data transfer objects (e.g. value objects).
+- The data can simple be the arguments in function calls.
+- Data packed into hashmaps (aka Ruby hashes).
+- The data should always be in the form that is most convenient for the inner circle (higher-level layer).
+
+Common violations of these are:
+
+- Passing Entity objects
+- Having the DB framework pass some sort of automated "row structure" created as a result of a query into the use case (e.g. pass in active record objects into the use cases).
+
 ## Chapter 23 Presenters and Humble Objects
 ## Chapter 24 Partial Boundaries
 ## Chapter 25 Layers and Boundaries
