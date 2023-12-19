@@ -29,7 +29,7 @@ Decoupling so that the architect can employ the Single Responsibility Principle 
 ## Chapter 17 Boundaries: Drawing Lines
 You draw lines between things that matter and things that don't. The GUI doesn't matter to the business rules, so there should be a line between them. The database doesn't matter to the GUI, so there should be a line between them.The database doesn't matter to the business rules, so there should be a line between them.
 
-![plugging-in-to-the-business-rules.png](plugging-in-to-the-business-rules.png)
+![plugging-in-to-the-business-rules.png](images/plugging-in-to-the-business-rules.png)
 
 The history of software development technology is the story of how to conveniently create plugins to establish a scalable and maintainable system architecture. The core business rules are kept separate from, and independent of, those components that are either optional or that can be implemented in many different forms.
 
@@ -87,7 +87,7 @@ The following things are often mistaken as an architecture, but they are not:
 ## Chapter 22 The Clean Architecture
 Once we know how to separate components by setting boundaries, we can organize these components into layers. Layers are concentric and represent how fundamental (or high-level) components are. At the core, we have the high-level policies, i.e. stable and abstract components encapsulating our business rules. On the outer ring, we have the details, for example, unstable and concrete GUI’s.
 
-![clean-architecture.jpg](clean-architecture.jpg)
+![clean-architecture.jpg](images/clean-architecture.jpg)
 
 Source-level dependencies should be organized according to the dependency rule: outer layers should depend on inner layers (at the source-level), and not vice versa. We can remove violations of the dependency rule by setting boundaries.
 
@@ -142,12 +142,12 @@ Note that as a general rule of thumb, code from outer layers should be compromis
 Ways to introduce partial boundaries:
 
 ### One-dimensional boundaries
-![strategy-pattern.png](strategy-pattern.png)
+![strategy-pattern.png](images/strategy-pattern.png)
 
 It should be clear that this sets the stage for a future architectural boundary. The necessary dependency inversion is in place in an attempt to isolate the Client from the ServiceImpl. It should also be clear that the separation can degrade pretty rapidly, as shown by the nasty dotted arrow in the diagram.
 
 ### Facades
-![facade-pattern.png](facade-pattern.png)
+![facade-pattern.png](images/facade-pattern.png)
 
 An even simpler boundary is the Facade pattern. In this case, even the dependency inversion is sacrificed. The boundary is simply defined by the Facade class, which lists all the services as methods, and deploys the service calls to classes that the client is not supposed to access.
 
