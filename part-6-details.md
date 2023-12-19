@@ -53,10 +53,10 @@ A case study that shows how to apply architectural thinking to an application.
 - Each actor represents a group of people that will drive changes into the system (they are reasons why the systems needs to change).
 - Partition the system such that changes for one actor does not impact other actors.
 
-![use-case-analysis.png](use-case-analysis.png)
+![use-case-analysis.png](images/use-case-analysis.png)
 
 ### Step 2: Create a Preliminary Component Architecture
-![preliminary-component-architecture.png](preliminary-component-architecture.png)
+![preliminary-component-architecture.png](images/preliminary-component-architecture.png)
 
 In this case, the Gateways are not divided by use case, meaning that this architecture does not follow the strict vertical and horizontal layer division presented before.
 
@@ -84,7 +84,7 @@ In Java, layers are often implemented as packages.
   - The project structure does not scream what the project does.
   - It is easy for developers to "skip a layer" and still maintain the rule of "all dependencies should point downward". For example, a controller may import a repository directly skipping the interactors. "Skipping a layer" can quickly degrade into big balls of mud.
 
-![package-by-layer.png](package-by-layer.png)
+![package-by-layer.png](images/package-by-layer.png)
 
 #### 2. Package by feature
 - Vertical slicing based on related features, domain concepts or aggregate roots.
@@ -93,7 +93,7 @@ In Java, layers are often implemented as packages.
   - It is easier to find all the code you need to touch if a use case / feature changes, since all is grouped together.
 - Cons:
   - It is often considered a step up from "package by layer", but both are sub-optimal. We can do better.
-![package-by-feature.png](package-by-feature.png)
+![package-by-feature.png](images/package-by-feature.png)
 
 
 #### 3. Ports and adapters
@@ -107,8 +107,8 @@ In Java, layers are often implemented as packages.
   - Will lead to a large number of packages.
   - It is still technically possible for the OrdersController to import the Orders skipping the OrdersService.
 
-![domain-and-infrastructure.png](domain-and-infrastructure.png)
-![view-orders-use-case.png](view-orders-use-case.png)
+![domain-and-infrastructure.png](images/domain-and-infrastructure.png)
+![view-orders-use-case.png](images/view-orders-use-case.png)
 
 #### 4. Package by component
 
@@ -125,7 +125,7 @@ The problems he is trying to solve are:
 - To avoid problems like this to happen, teams often rely on discipline (but we know how that goes) or extra static analysis tools to detect when the intended architecture has been violated. He argues that the best approach to enforce this architectural principle is via the compiler.
 Static analysis tools work, but sometimes extend the feedback cycle too much.
 
-![package-by-component.png](package-by-component.png)
+![package-by-component.png](images/package-by-component.png)
 
 ##### Trade-offs
 Compared to "ports and adapters", trade-offs a little bit of the strictness in the horizontal layering for having less packages and making it impossible to import the wrong thing from the OrdersController.
